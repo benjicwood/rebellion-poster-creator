@@ -3,7 +3,7 @@
     <PosterRow
       class="headliner"
       :row="rows.headliner"
-      placeholder="CLICK TO ADD HEADLINER(S)"
+      placeholder="CLICK TO ADD HEADLINERS"
       @click="openEditor('headliner', 'Headliner')"
       :alwaysHighlight="alwaysHighlight || isActiveRow('headliner')"
       :showPlaceholderAlways="!posterStarted"
@@ -13,7 +13,7 @@
     <PosterRow
       class="co-headliner"
       :row="rows.coHeadliner"
-      placeholder="CLICK TO ADD THURSDAY HEADLINER(S)"
+      placeholder="CLICK TO ADD MAIN SUPPORTS"
       @click="openEditor('coHeadliner', 'Co-Headliner')"
       :alwaysHighlight="alwaysHighlight || isActiveRow('coHeadliner')"
       :showPlaceholderAlways="!posterStarted"
@@ -23,7 +23,7 @@
     <PosterRow
       class="second-row"
       :row="rows.secondRow"
-      placeholder="CLICK TO ADD MAIN SUPPORTS"
+      placeholder="CLICK TO ADD MAIN BAND LOGOS"
       @click="openEditor('secondRow', 'Main Support')"
       :alwaysHighlight="alwaysHighlight || isActiveRow('secondRow')"
       :showPlaceholderAlways="!posterStarted"
@@ -33,7 +33,7 @@
     <PosterRow
       class="lower-lineup-one"
       :row="rows.lowerLineupOne"
-      placeholder="CLICK TO ADD BANDS"
+      placeholder="CLICK TO ADD BAND LOGOS"
       @click="openEditor('lowerLineupOne', 'Lower Lineup')"
       :alwaysHighlight="alwaysHighlight || isActiveRow('lowerLineupOne')"
       :showPlaceholderAlways="!posterStarted"
@@ -43,7 +43,7 @@
     <PosterRow
       class="lower-lineup-two"
       :row="rows.lowerLineupTwo"
-      placeholder="CLICK TO ADD BANDS"
+      placeholder="CLICK TO ADD BAND LOGOS"
       @click="openEditor('lowerLineupTwo', 'Lower Lineup')"
       :alwaysHighlight="alwaysHighlight || isActiveRow('lowerLineupTwo')"
       :showPlaceholderAlways="!posterStarted"
@@ -53,7 +53,7 @@
     <PosterRow
       class="lower-lineup-three"
       :row="rows.lowerLineupThree"
-      placeholder="CLICK TO ADD BANDS"
+      placeholder="CLICK TO ADD BAND LOGOS"
       @click="openEditor('lowerLineupThree', 'Lower Lineup')"
       :alwaysHighlight="alwaysHighlight || isActiveRow('lowerLineupThree')"
       :showPlaceholderAlways="!posterStarted"
@@ -461,6 +461,7 @@ defineExpose({
 @use "../../../assets/scss/styles.scss";
 
 .poster-content {
+  container-type: inline-size;
   position: absolute;
   top: 0;
   left: 50%;

@@ -32,7 +32,7 @@
         <span
           v-else
           class="poster-logo-fallback"
-          :style="{ fontSize: `${getLogoFallbackSize(band.name)}px` }"
+          :style="{ fontSize: `${getLogoFallbackSize(band.name)}cqw` }"
         >
           {{ band.name }}
         </span>
@@ -146,6 +146,7 @@ export default {
         lineHeight: this.row?.allowWrap ? "1.05" : "1",
         letterSpacing: this.resolvedLetterSpacing,
         textAlign: this.row?.textAlign || "center",
+        margin: "auto",
       };
     },
     showLogoLayout() {
@@ -203,7 +204,7 @@ export default {
     fitRowText() {
       const container = this.$refs.rowEl;
 
-      if (!container || !this.displayText || this.isLogoMode) {
+      if (!container || !this.displayText || this.showLogoLayout) {
         this.resolvedPx = this.basePx;
         this.resolvedLetterSpacing = `${this.baseLetterSpacing}em`;
         return;
@@ -253,22 +254,6 @@ export default {
       const size = Number(this.row?.size) || 5;
       let targetPx = Math.round(fittedPx * (scaleMap[size] || 1));
 
-      const isMobile = window.innerWidth <= 700;
-
-      const isSparseLowerLineup =
-        this.row?.capSparseText && this.displayText.length < 40;
-
-      if (isSparseLowerLineup) {
-        targetPx = Math.min(targetPx, isMobile ? 14 : 22);
-      }
-
-      const isLikelySingleLine =
-        !isMobile && this.row?.capSparseText && this.displayText.length < 40;
-
-      if (isLikelySingleLine) {
-        targetPx = Math.min(targetPx, 22);
-      }
-
       for (let px = targetPx; px >= this.minPx; px--) {
         if (
           this.textFits({
@@ -295,29 +280,27 @@ export default {
       const size = Number(this.row?.size || 5);
 
       const sizeMap = {
-        1: 14,
-        2: 17,
-        3: 20,
-        4: 23,
-        5: 26,
-        6: 30,
-        7: 34,
-        8: 38,
-        9: 43,
-        10: 48,
+        1: 18,
+        2: 21,
+        3: 24,
+        4: 27,
+        5: 30,
+        6: 34,
+        7: 38,
+        8: 42,
+        9: 46,
+        10: 50,
       };
 
-      const desiredSize = sizeMap[size] || 17;
+      let desiredSize = sizeMap[size] || 17;
 
-      // Roughly shrink longer names.
-      // Short names get the full row-size treatment.
       const length = name?.length || 0;
 
-      if (length > 25) return Math.max(10, desiredSize * 0.6);
-      if (length > 18) return Math.max(10, desiredSize * 0.72);
-      if (length > 12) return Math.max(10, desiredSize * 0.85);
+      if (length > 25) desiredSize *= 0.6;
+      else if (length > 18) desiredSize *= 0.72;
+      else if (length > 12) desiredSize *= 0.85;
 
-      return desiredSize;
+      return (desiredSize / 700) * 100;
     },
 
     textFits({
